@@ -27,7 +27,7 @@ public class TextController {
 	}
 
 	@GetMapping(value="/text/lang/{lang}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public TextResponse greetingGet(@PathVariable(value = "lang") String lang) {
+	public TextResponse provideText(@PathVariable(value = "lang") String lang) {
 		
 		TextEntity text = textService.findByLang(lang);		
 		String port = environment.getProperty("local.server.port");

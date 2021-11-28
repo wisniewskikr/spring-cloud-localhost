@@ -17,14 +17,14 @@ public class GreetingController {
 
 	private static final String VERSION = "1";
 	
-	@Autowired
 	private Environment environment;
 	
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	public GreetingController(RestTemplate restTemplate) {
+	public GreetingController(RestTemplate restTemplate, Environment environment) {
 		this.restTemplate = restTemplate;
+		this.environment = environment;
 	}
 
 	@GetMapping(value="/greeting/lang/{lang}/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,8 +33,7 @@ public class GreetingController {
 			@PathVariable(value = "name") String name) {
 		
 		ResponseEntity<TextResponse> textResponseEntity = restTemplate.getForEntity("http://localhost:9090/text/lang/" + lang, TextResponse.class);
-		TextResponse textResponse = textResponseEntity.getBody();
-		
+		TextResponse textResponse = textResponseEntity.getBody();		
 		String port = environment.getProperty("local.server.port");
 		return new GreetingResponse(
 				textResponse.getText() + " " + name, 
