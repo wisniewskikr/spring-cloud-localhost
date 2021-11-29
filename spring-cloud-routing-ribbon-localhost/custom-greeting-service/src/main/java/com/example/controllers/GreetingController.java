@@ -32,7 +32,7 @@ public class GreetingController {
 			@PathVariable(value = "lang") String lang,
 			@PathVariable(value = "name") String name) {
 		
-		ResponseEntity<TextResponse> textResponseEntity = restTemplate.getForEntity("http://tmp/text/lang/" + lang, TextResponse.class);
+		ResponseEntity<TextResponse> textResponseEntity = restTemplate.getForEntity("http://custom-text-service-ribbon/text/lang/" + lang, TextResponse.class);
 		TextResponse textResponse = textResponseEntity.getBody();		
 		String port = environment.getProperty("local.server.port");
 		return new GreetingResponse(

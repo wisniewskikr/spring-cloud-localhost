@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import com.example.configs.RibbonConfig;
 
 @SpringBootApplication
-@RibbonClient(name = "ribbon-client", configuration = RibbonConfig.class)
+@RibbonClient(name = "some-name", configuration = RibbonConfig.class)
 public class Application {
 
 	public static void main(String[] args) {
