@@ -2,5 +2,12 @@ spring:
   application:
     name: custom-greeting-service
 
+tmp:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:9090
+    ServerListRefreshInterval: 2000
+
 server:
   port: ${port:8080}
