@@ -2,7 +2,6 @@ package com.example.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,17 +15,16 @@ public class TextController {
 
 	private static final String VERSION = "1";
 	
-	@Autowired
-	private Environment environment;
-	
+	private Environment environment;	
 	private TextService textService;
 	
 	@Autowired
-	public TextController(TextService textService) {
+	public TextController(Environment environment, TextService textService) {
 		this.textService = textService;
+		this.environment = environment;
 	}
 
-	@GetMapping(value="/text/lang/{lang}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/text/lang/{lang}")
 	public TextResponse provideText(@PathVariable(value = "lang") String lang) {
 		
 		TextEntity text = textService.findByLang(lang);		
