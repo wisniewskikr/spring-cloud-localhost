@@ -8,7 +8,7 @@
 		<version>2.3.6.RELEASE</version>		
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>custom-text-service</artifactId>
+	<artifactId>system-ribbon-loadbalancer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -32,23 +32,10 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-		
-		<!-- Spring JPA dependencies -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		
-		<!-- H2 database dependencies -->
-		<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
 		
 	</dependencies>

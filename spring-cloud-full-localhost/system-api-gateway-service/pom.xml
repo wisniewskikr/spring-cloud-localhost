@@ -8,7 +8,7 @@
 		<version>2.3.6.RELEASE</version>		
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>custom-greeting-service</artifactId>
+	<artifactId>system-api-gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -19,18 +19,9 @@
 
 	<dependencies>
 	
-		<!-- Spring dependencies -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<!-- Hot swapping, disable cache for template, enable live reload -->
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
         
         <dependency>
@@ -61,44 +52,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<profiles>
-	
-		<profile>
-	      <id>refreshContainer</id>
-	      <build>
-	         <plugins>	 		         
-		         <plugin>
-			        <artifactId>maven-antrun-plugin</artifactId>
-			        <executions>
-			          <execution>
-			            <phase>package</phase>
-			            <configuration>
-			
-			                <target>                 
-  								<exec executable="docker-compose">                      
-  									<arg value="-f"/> 
-  									<arg value="../docker-compose-fast.yml"/> 
-  									<arg value="up"/> 
-  									<arg value="-d"/> 
-  									<arg value="--build"/> 
-  									<arg value="--force-recreate"/> 
-  									<arg value="--no-deps"/> 
-  									<arg value="${project.artifactId}"/>       
-  								</exec> 
-  							</target>
-			
-			            </configuration>
-			            <goals>
-			              <goal>run</goal>
-			            </goals>
-			          </execution>
-			        </executions>
-			      </plugin>	                 
-	         </plugins>
-	      </build>
-	   </profile>	 
-	   
-	</profiles>
 
 </project>
