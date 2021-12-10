@@ -3,12 +3,11 @@ package com.example.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import com.example.clients.CustomTextServiceClient;
 import com.example.responses.GreetingResponse;
 import com.example.responses.TextResponse;
 
@@ -19,11 +18,11 @@ public class GreetingController {
 	
 	private Environment environment;
 	
-	private RestTemplate restTemplate;
+	private CustomTextServiceClient customTextServiceClient;
 	
 	@Autowired
-	public GreetingController(RestTemplate restTemplate, Environment environment) {
-		this.restTemplate = restTemplate;
+	public GreetingController(CustomTextServiceClient customTextServiceClient, Environment environment) {
+		this.customTextServiceClient = customTextServiceClient;
 		this.environment = environment;
 	}
 
@@ -32,8 +31,7 @@ public class GreetingController {
 			@PathVariable(value = "lang") String lang,
 			@PathVariable(value = "name") String name) {
 		
-		ResponseEntity<TextResponse> textResponseEntity = restTemplate.getForEntity("http://localhost:8090/text/lang/" + lang, TextResponse.class);
-		TextResponse textResponse = textResponseEntity.getBody();		
+		TextResponse textResponse = customTextServiceClient.provideText(lang);		
 		String port = environment.getProperty("local.server.port");
 		return new GreetingResponse(
 				textResponse.getText() + " " + name, 

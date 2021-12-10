@@ -11,9 +11,9 @@ ORDER
 -----
 
 You have to run projects if following order:
-- Eureka;
+- Eureka: (contains Loadbalancer Ribbon);
 - Text;
-- Greeting;
+- Greeting (contains REST Client Operfeign);
 - Gateway.
 
 
